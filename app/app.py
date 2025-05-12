@@ -8,9 +8,13 @@ def registration_form():
 
 @app.route('/register', methods=['POST'])
 def register():
-    name = request.form['name']
-    email = request.form['email']
-    event = request.form['event']
+    name = request.form.get('name')
+    email = request.form.get('email')
+    event = request.form.get('event')
+
+    if not name or not email or not event:
+        return "Missing data", 400
+
     return f"Thanks {name} for registering for {event}! Confirmation sent to {email}."
 
 if __name__ == '__main__':
