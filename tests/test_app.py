@@ -31,4 +31,5 @@ def test_register_missing_data(client):
         'name': 'Bob'
     })
     assert response.status_code == 400
-    assert b"Bad Request" in response.data  # Updated for actual Flask error
+    assert b"Missing data" in response.data  # Matches actual app response
+
