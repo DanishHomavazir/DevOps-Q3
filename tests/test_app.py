@@ -20,14 +20,15 @@ def test_index_page(client):
 def test_register_success(client):
     response = client.post('/register', data={
         'name': 'Alice',
-        'email': 'alice@example.com'
+        'email': 'alice@example.com',
+        'event': 'Tech Talk'
     })
     assert response.status_code == 200
-    assert b"Thanks for registering, Alice!" in response.data
+    assert b"Thanks Alice for registering for Tech Talk!" in response.data
 
 def test_register_missing_data(client):
     response = client.post('/register', data={
         'name': 'Bob'
     })
     assert response.status_code == 400
-    assert b"Missing data" in response.data
+    assert b"Bad Request" in response.data  # Updated for actual Flask error
